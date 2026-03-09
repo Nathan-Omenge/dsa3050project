@@ -69,11 +69,32 @@ I started by importing the raw CSV datasets into Power BI. These included the co
 
 After loading the files, I opened **Power Query Editor** and inspected the structure of each table to understand the available columns, data types, and potential issues such as missing values or inconsistent formats.
 
-![alt text](image.png)
+![alt text](image-2.png) ## Loading the data
+![alt text](image.png) ## Kaggle Dataset
+![alt text](image-1.png) ## How it looks in Power BI
+![alt text](image-3.png) ## Loading the data
 
 
+## 2. Data Cleaning and Standardization
 
-## 2. Merging Related Tables
+Before proceeding with further transformations, I performed several basic data cleaning steps to ensure the dataset was consistent and free from formatting issues.
+
+First, I applied **Trim** and **Clean** transformations to relevant text columns. The **Trim** function removed any leading or trailing spaces that could cause inconsistencies when grouping or filtering data, while the **Clean** function removed non-printable characters that sometimes appear in imported datasets.
+
+Next, I standardized text formatting by applying **Capitalization** (using the *Capitalize Each Word* option) to selected columns such as product categories and other descriptive fields. I decided to do this to ensure that the text values appear consistent and professional when used in reports and visualizations.
+
+Finally, I reviewed all columns in the merged dataset and removed any **unnecessary or redundant columns** that were not required for analysis. This helped simplify the dataset, reduce model size, and improve overall performance when building the Power BI report.
+
+These cleaning steps ensured that the dataset was well-structured, consistent, and ready for further transformation and analysis.
+
+![alt text](image-27.png) ## Cleaning
+![alt text](image-28.png) ## Trimming
+![alt text](image-29.png) ## Capitalizing each word
+
+![alt text](image-32.png) ## Removing unnecessary columns
+
+
+## 3. Merging Related Tables
 
 Because the original data was stored across several relational tables, I decided to merge them into a single enriched analytical table. I used **Merge Queries** in Power Query to join the tables using their key fields.
 
@@ -90,13 +111,19 @@ For each merge operation, I used a **Left Outer Join** so that all records from 
 
 After performing the joins, I expanded only the columns necessary for analysis, such as order timestamps, product categories, customer location information, and payment details.
 
-<!-- INSERT SCREENSHOT: Merge Queries dialog showing the join between tables -->
+![alt text](image-4.png) ## Olist_order_items merged with Olist_orders
+![alt text](image-5.png) ## Olist_order_items merged with Olist_products 
+![alt text](image-6.png) ## Olist_order_items merged with Olist_customers
+![alt text](image-9.png) ## Olist_order_items merged with Olist_order_payments
 
-<!-- INSERT SCREENSHOT: Expanded columns after merging tables -->
+![alt text](image-7.png) ## expanding olist_orders
+![alt text](image-8.png) ## expanding olist_products
+![alt text](image-10.png) ## expanding olist_customers
+![alt text](image-11.png) ## expanding olist_order_payments
 
 ---
 
-## 3. Renaming Columns for Clarity
+## 4. Renaming Columns for Clarity
 
 After merging the tables, I noticed that several column names were long or not immediately intuitive for analysis. I decided to rename them to improve clarity and readability.
 
@@ -108,11 +135,11 @@ Examples of renaming include:
 
 This step ensures that the dataset is easier to understand when building visualizations and writing DAX measures later in the project.
 
-<!-- INSERT SCREENSHOT: Renamed columns in Power Query -->
+![alt text](image-12.png) ## renamed to order_date
 
 ---
 
-## 4. Correcting Data Types
+## 5. Correcting Data Types
 
 Next, I verified and corrected the data types of all columns to ensure consistency.
 
@@ -124,11 +151,12 @@ For example:
 
 Correct data types are important because they allow Power BI to perform calculations correctly and avoid errors during analysis.
 
-<!-- INSERT SCREENSHOT: Data type adjustments in Power Query -->
+![alt text](image-13.png) ## changed from Date/Time to Date
+![alt text](image-34.png) ## changed from any to text
 
 ---
 
-## 5. Removing Duplicate Records
+## 6. Removing Duplicate Records
 
 To maintain data integrity, I checked for duplicate rows in the dataset.
 
@@ -140,11 +168,11 @@ This ensured that each row in the dataset represents a unique item within an ord
 
 Removing duplicates prevents inaccurate calculations in measures such as total sales or total orders.
 
-<!-- INSERT SCREENSHOT: Remove Duplicates step in Power Query -->
+![alt text](image-14.png) ## removing duplicate records
 
 ---
 
-## 6. Handling Missing Values
+## 7. Handling Missing Values
 
 During inspection, I noticed that some delivery-related fields contained missing values.
 
@@ -157,21 +185,23 @@ The logic used was:
 
 This approach preserves the original data while still enabling meaningful analysis of delivery performance.
 
-<!-- INSERT SCREENSHOT: Conditional column creation -->
+![alt text](image-16.png) ## Creating the conditional column
+![alt text](image-15.png) ## Shipping_Status column
 
 ---
 
-## 7. Creating Delivery Time Metrics
+## 8. Creating Delivery Time Metrics
 
 To enable delivery performance analysis, I created a custom column to calculate the number of days between the order purchase date and the actual delivery date.
 
 This column calculates the **delivery duration in days**, which will later be used in dashboard visuals and KPI calculations.
 
-<!-- INSERT SCREENSHOT: Custom column formula calculating delivery days -->
+![alt text](image-17.png) ## Creating the custom column
+![alt text](image-18.png) ## Delivery_days column
 
 ---
 
-## 8. Extracting Date Components
+## 9. Extracting Date Components
 
 To support time-based analysis, I extracted several components from the order purchase date.
 
@@ -185,11 +215,16 @@ The following columns were created:
 
 These fields allow the dashboard to analyze trends such as monthly sales patterns and quarterly performance.
 
-<!-- INSERT SCREENSHOT: Extracted date components -->
+![alt text](image-21.png) ## Inserted year
+![alt text](image-22.png) ## Year column
+![alt text](image-23.png) ## Inserted month column
+![alt text](image-24.png) ## Inserted month name
+![alt text](image-25.png) ## Inserted quarter
+![alt text](image-26.png) ## Inserted day
 
 ---
 
-## 9. Creating Regional Groupings
+## 10. Creating Regional Groupings
 
 The dataset included customer locations at the **state level**, which can be too granular for some business insights. To simplify geographic analysis, I created a new **Region** column that groups states into Brazil’s major geographic regions.
 
@@ -201,22 +236,23 @@ For example:
 
 This transformation enables higher-level geographic comparisons such as **sales by region** and **delivery performance by region**.
 
-<!-- INSERT SCREENSHOT: Custom column used to group states into regions -->
+![alt text](image-20.png) ## Creating the conditional column
+![alt text](image-19.png) ## Region column
 
 ---
 
-## 10. Creating Additional Analytical Columns
+## 11. Creating Additional Analytical Columns
 
 Finally, I created additional derived columns that help support business metrics used later in the dashboard.
 
 Examples include:
 
 * **Order Total** (product price + freight value)
-* **Delivery Delay** (difference between estimated delivery and actual delivery)
 
 These calculated columns enhance the dataset by introducing metrics that directly relate to operational and financial performance.
 
-<!-- INSERT SCREENSHOT: Additional calculated columns -->
+![alt text](image-30.png) ## Custom column creation
+![alt text](image-31.png) ## Order_total column
 
 ---
 
@@ -236,4 +272,9 @@ Through the Power Query process, I completed several key data preparation steps:
 
 These transformations ensured that the dataset was clean, structured, and ready for **data modeling, DAX calculations, and dashboard development** in the subsequent stages of the project.
 
-<!-- INSERT SCREENSHOT: Final cleaned dataset in Power Query -->
+![alt text](image-33.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+![alt text](image-37.png)
+![alt text](image-38.png)
+![alt text](image-39.png)
