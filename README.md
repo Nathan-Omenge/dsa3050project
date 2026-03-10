@@ -69,10 +69,10 @@ I started by importing the raw CSV datasets into Power BI. These included the co
 
 After loading the files, I opened **Power Query Editor** and inspected the structure of each table to understand the available columns, data types, and potential issues such as missing values or inconsistent formats.
 
-![alt text](image-2.png) ## Loading the data
-![alt text](image.png) ## Kaggle Dataset
-![alt text](image-1.png) ## How it looks in Power BI
-![alt text](image-3.png) ## Loading the data
+![alt text](Screenshots/image-2.png) ## Loading the data
+![alt text](Screenshots/image.png) ## Kaggle Dataset
+![alt text](Screenshots/image-1.png) ## How it looks in Power BI
+![alt text](Screenshots/image-3.png) ## Loading the data
 
 
 ## 2. Data Cleaning and Standardization
@@ -87,11 +87,11 @@ Finally, I reviewed all columns in the merged dataset and removed any **unnecess
 
 These cleaning steps ensured that the dataset was well-structured, consistent, and ready for further transformation and analysis.
 
-![alt text](image-27.png) ## Cleaning
-![alt text](image-28.png) ## Trimming
-![alt text](image-29.png) ## Capitalizing each word
+![alt text](Screenshots/image-27.png) ## Cleaning
+![alt text](Screenshots/image-28.png) ## Trimming
+![alt text](Screenshots/image-29.png) ## Capitalizing each word
 
-![alt text](image-32.png) ## Removing unnecessary columns
+![alt text](Screenshots/image-32.png) ## Removing unnecessary columns
 
 
 ## 3. Merging Related Tables
@@ -111,15 +111,15 @@ For each merge operation, I used a **Left Outer Join** so that all records from 
 
 After performing the joins, I expanded only the columns necessary for analysis, such as order timestamps, product categories, customer location information, and payment details.
 
-![alt text](image-4.png) ## Olist_order_items merged with Olist_orders
-![alt text](image-5.png) ## Olist_order_items merged with Olist_products 
-![alt text](image-6.png) ## Olist_order_items merged with Olist_customers
-![alt text](image-9.png) ## Olist_order_items merged with Olist_order_payments
+![alt text](Screenshots/image-4.png) ## Olist_order_items merged with Olist_orders
+![alt text](Screenshots/image-5.png) ## Olist_order_items merged with Olist_products 
+![alt text](Screenshots/image-6.png) ## Olist_order_items merged with Olist_customers
+![alt text](Screenshots/image-9.png) ## Olist_order_items merged with Olist_order_payments
 
-![alt text](image-7.png) ## expanding olist_orders
-![alt text](image-8.png) ## expanding olist_products
-![alt text](image-10.png) ## expanding olist_customers
-![alt text](image-11.png) ## expanding olist_order_payments
+![alt text](Screenshots/image-7.png) ## expanding olist_orders
+![alt text](Screenshots/image-8.png) ## expanding olist_products
+![alt text](Screenshots/image-10.png) ## expanding olist_customers
+![alt text](Screenshots/image-11.png) ## expanding olist_order_payments
 
 ---
 
@@ -135,7 +135,7 @@ Examples of renaming include:
 
 This step ensures that the dataset is easier to understand when building visualizations and writing DAX measures later in the project.
 
-![alt text](image-12.png) ## renamed to order_date
+![alt text](Screenshots/image-12.png) ## renamed to order_date
 
 ---
 
@@ -151,8 +151,8 @@ For example:
 
 Correct data types are important because they allow Power BI to perform calculations correctly and avoid errors during analysis.
 
-![alt text](image-13.png) ## changed from Date/Time to Date
-![alt text](image-34.png) ## changed from any to text
+![alt text](Screenshots/image-13.png) ## changed from Date/Time to Date
+![alt text](Screenshots/image-34.png) ## changed from any to text
 
 ---
 
@@ -168,7 +168,7 @@ This ensured that each row in the dataset represents a unique item within an ord
 
 Removing duplicates prevents inaccurate calculations in measures such as total sales or total orders.
 
-![alt text](image-14.png) ## removing duplicate records
+![alt text](Screenshots/image-14.png) ## removing duplicate records
 
 ---
 
@@ -185,8 +185,8 @@ The logic used was:
 
 This approach preserves the original data while still enabling meaningful analysis of delivery performance.
 
-![alt text](image-16.png) ## Creating the conditional column
-![alt text](image-15.png) ## Shipping_Status column
+![alt text](Screenshots/image-16.png) ## Creating the conditional column
+![alt text](Screenshots/image-15.png) ## Shipping_Status column
 
 ---
 
@@ -196,8 +196,8 @@ To enable delivery performance analysis, I created a custom column to calculate 
 
 This column calculates the **delivery duration in days**, which will later be used in dashboard visuals and KPI calculations.
 
-![alt text](image-17.png) ## Creating the custom column
-![alt text](image-18.png) ## Delivery_days column
+![alt text](Screenshots/image-17.png) ## Creating the custom column
+![alt text](Screenshots/image-18.png) ## Delivery_days column
 
 ---
 
@@ -215,12 +215,12 @@ The following columns were created:
 
 These fields allow the dashboard to analyze trends such as monthly sales patterns and quarterly performance.
 
-![alt text](image-21.png) ## Inserted year
-![alt text](image-22.png) ## Year column
-![alt text](image-23.png) ## Inserted month column
-![alt text](image-24.png) ## Inserted month name
-![alt text](image-25.png) ## Inserted quarter
-![alt text](image-26.png) ## Inserted day
+![alt text](Screenshots/image-21.png) ## Inserted year
+![alt text](Screenshots/image-22.png) ## Year column
+![alt text](Screenshots/image-23.png) ## Inserted month column
+![alt text](Screenshots/image-24.png) ## Inserted month name
+![alt text](Screenshots/image-25.png) ## Inserted quarter
+![alt text](Screenshots/image-26.png) ## Inserted day
 
 ---
 
@@ -236,8 +236,8 @@ For example:
 
 This transformation enables higher-level geographic comparisons such as **sales by region** and **delivery performance by region**.
 
-![alt text](image-20.png) ## Creating the conditional column
-![alt text](image-19.png) ## Region column
+![alt text](Screenshots/image-20.png) ## Creating the conditional column
+![alt text](Screenshots/image-19.png) ## Region column
 
 ---
 
@@ -251,8 +251,8 @@ Examples include:
 
 These calculated columns enhance the dataset by introducing metrics that directly relate to operational and financial performance.
 
-![alt text](image-30.png) ## Custom column creation
-![alt text](image-31.png) ## Order_total column
+![alt text](Screenshots/image-30.png) ## Custom column creation
+![alt text](Screenshots/image-31.png) ## Order_total column
 
 ---
 
@@ -272,9 +272,9 @@ Through the Power Query process, I completed several key data preparation steps:
 
 These transformations ensured that the dataset was clean, structured, and ready for **data modeling, DAX calculations, and dashboard development** in the subsequent stages of the project.
 
-![alt text](image-33.png)
-![alt text](image-35.png)
-![alt text](image-36.png)
-![alt text](image-37.png)
-![alt text](image-38.png)
-![alt text](image-39.png)
+![alt text](Screenshots/image-33.png)
+![alt text](Screenshots/image-35.png)
+![alt text](Screenshots/image-36.png)
+![alt text](Screenshots/image-37.png)
+![alt text](Screenshots/image-38.png)
+![alt text](Screenshots/image-39.png)
