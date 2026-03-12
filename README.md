@@ -272,6 +272,8 @@ Through the Power Query process, I completed several key data preparation steps:
 
 These transformations ensured that the dataset was clean, structured, and ready for **data modeling, DAX calculations, and dashboard development** in the subsequent stages of the project.
 
+## This photos basically follow a trend, we are going through the columns and swiping down on the query settings to show the work done.
+
 ![alt text](Screenshots/image-33.png)
 ![alt text](Screenshots/image-35.png)
 ![alt text](Screenshots/image-36.png)
