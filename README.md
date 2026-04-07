@@ -3,6 +3,7 @@
 **Group Members:**
 
 * Arlen Ngahu - 667855
+* Allan Mutugi -667095
 
 **Class:** Business Organization and Data Visualization Course - DSA3050A
 **Semester:** Spring 2026
