@@ -1,8 +1,8 @@
 # **E-Commerce Sales and Delivery Performance Analysis Using Power BI**
 
-**Group Members:**
+**Team Members:**
 
-* Arlen Ngahu - 667855
+* Arlen Ngahu - Power Query Data Preparation and Transformation
 * Allan Mutugi -667095
 
 **Class:** Business Organization and Data Visualization Course - DSA3050A
@@ -56,8 +56,9 @@ These tables were merged and transformed during the **Power Query data preparati
 5. Key Insights and Findings
 
 
-
+---
 ## Power Query Data Preparation and Transformation
+Arlen Ngahu - 667855
 
 
 In this stage of the project, I used **Power Query in Microsoft Power BI** to clean, transform, and prepare the raw e-commerce dataset for analysis. Although the dataset was relatively structured, I still performed several transformations to ensure that the data model was consistent, reliable, and suitable for analytical reporting. Each transformation step is documented below.
