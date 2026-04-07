@@ -4,11 +4,12 @@
 
 * Arlen Ngahu - Power Query Data Preparation and Transformation
 * Brad Ochola - DAX Measures and Calculations
-* Andy Hadulo - Dashboard Design and Visualizations
-* Nathan Omenge - Data Modeling
+* Andy Hadulo - Dashboard Design and Visualisations
+* Nicholas Kinyanjui -  Dashboard Design and Visualisations 
+* Nathan Omenge - Data Modelling
 * Allan Mutugi - README & Documentation
 
-**Class:** Business Organization and Data Visualization Course - DSA3050A
+**Class:** Business Organisation and Data Visualisation Course - DSA3050A
 **Semester:** Spring 2026
 
 
