@@ -285,3 +285,11 @@ These transformations ensured that the dataset was clean, structured, and ready 
 ![alt text](Screenshots/image-37.png)
 ![alt text](Screenshots/image-38.png)
 ![alt text](Screenshots/image-39.png)
+
+
+## DAX measures & columns 
+
+From the DimPayments dataset we calculate the total payments per Payment type 
+
+<img width="1337" height="672" alt="image" src="https://github.com/user-attachments/assets/118e6128-bafb-4bd8-b79e-9d3fd984df4f" />
+
