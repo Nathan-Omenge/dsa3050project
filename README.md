@@ -3,7 +3,10 @@
 **Team Members:**
 
 * Arlen Ngahu - Power Query Data Preparation and Transformation
-* Allan Mutugi -667095
+* Brad Ochola - DAX Measures and Calculations
+* Andy Hadulo - Dashboard Design and Visualizations
+* Nathan Omenge - Data Modeling
+* Allan Mutugi - README & Documentation
 
 **Class:** Business Organization and Data Visualization Course - DSA3050A
 **Semester:** Spring 2026
