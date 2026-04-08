@@ -4,8 +4,7 @@
 
 * Arlen Ngahu - Power Query Data Preparation and Transformation
 * Brad Ochola - DAX Measures and Calculations
-* Andy Hadulo - Dashboard Design and Visualisations
-* Nicholas Kinyanjui -  Dashboard Design and Visualisations 
+* Andy Hadulo & Nicholas Kinyanjui - Dashboard Design and Visualisations
 * Nathan Omenge - Data Modelling
 * Allan Mutugi - README & Documentation
 
@@ -58,7 +57,7 @@ These tables were merged and transformed during the **Power Query data preparati
 |---|---|---|
 | Arlen Ngahu | Power Query Data Preparation and Transformation | Cleaned and transformed raw CSV datasets; merged multiple relational tables; standardized data types; created derived columns for delivery metrics and regional groupings; prepared dataset for analysis |
 | Brad Ochola | DAX Measures and Calculations | Created DAX measures for total payments by payment type; developed calculated columns for product volume; built aggregated measures for total volume per product; enabled complex business logic calculations |
-| Andy Hadulo | Dashboard Design and Visualizations | Designed interactive Power BI dashboards; created visual representations of key metrics; built user-friendly reports for stakeholders; implemented drill-down capabilities for detailed analysis |
+| Andy Hadulo & Nicholas Kinyanjui| Dashboard Design and Visualizations | Designed interactive Power BI dashboards; created visual representations of key metrics; built user-friendly reports for stakeholders; implemented drill-down capabilities for detailed analysis |
 | Nathan Omenge | Data Modeling | Established relationships between tables; designed star schema structure; optimized data model for performance; ensured data integrity across all dimensions and fact tables |
 | Allan Mutugi | README & Documentation | Created comprehensive project documentation; documented all transformation steps; provided detailed explanations of methodology; ensured project clarity for stakeholders |
 
@@ -284,6 +283,7 @@ These transformations ensured that the dataset was clean, structured, and ready 
 ---
 
 ## DAX measures & columns 
+Andy Hadulo - 
 
 #### From the DimPayments dataset we calculate the total payments per Payment type 
 
