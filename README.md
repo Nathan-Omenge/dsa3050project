@@ -38,7 +38,8 @@ Through this process, the project demonstrates how **business intelligence tools
 
 ## Dataset Description
 
-The dataset used in this project contains transactional information from an e-commerce platform. It includes multiple related tables covering:
+The dataset used in this project contains transactional information from an e-commerce platform.The data comes from the **Brazilian E-commerce Public Dataset by Olist**, available at: [Brazilian E-commerce Dataset - Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) 
+It includes multiple related tables covering:
 
 * Customer information
 * Orders
@@ -53,11 +54,13 @@ These tables were merged and transformed during the **Power Query data preparati
 
 ## Project Sections
 
-1. Power Query Data Preparation
-2. Data Modeling
-3. DAX Measures and Calculations
-4. Dashboard Design and Visualizations
-5. Key Insights and Findings
+| Team Member | Objectives | Deliverables |
+|---|---|---|
+| Arlen Ngahu | Power Query Data Preparation and Transformation | Cleaned and transformed raw CSV datasets; merged multiple relational tables; standardized data types; created derived columns for delivery metrics and regional groupings; prepared dataset for analysis |
+| Brad Ochola | DAX Measures and Calculations | Created DAX measures for total payments by payment type; developed calculated columns for product volume; built aggregated measures for total volume per product; enabled complex business logic calculations |
+| Andy Hadulo | Dashboard Design and Visualizations | Designed interactive Power BI dashboards; created visual representations of key metrics; built user-friendly reports for stakeholders; implemented drill-down capabilities for detailed analysis |
+| Nathan Omenge | Data Modeling | Established relationships between tables; designed star schema structure; optimized data model for performance; ensured data integrity across all dimensions and fact tables |
+| Allan Mutugi | README & Documentation | Created comprehensive project documentation; documented all transformation steps; provided detailed explanations of methodology; ensured project clarity for stakeholders |
 
 
 ---
@@ -300,9 +303,18 @@ This measure calculates the aggregated payment amount grouped by payment type fr
 
 <img width="1301" height="640" alt="image" src="https://github.com/user-attachments/assets/1b9a4754-0e84-4045-94f2-0fd4a0a84f7b" />
 
+This calculated column computes the volume of products by calculating the total quantity of items ordered. The column uses DAX to aggregate order quantities at the product level. This metric is essential for understanding product demand and inventory movement.
 
 #### measure of total volume per product using dax 
 
 <img width="1314" height="648" alt="image" src="https://github.com/user-attachments/assets/921f386e-6a1b-4913-ad5e-4eb7454c3e98" />
+
+This measure calculates the total volume aggregated by product category. It sums the product volumes across all orders, grouped by product category, enabling high-level analysis of category performance. The measure uses SUMX in combination with category grouping to provide insights into which product categories have the highest sales volumes.
+
+**Technical Details:**
+- The measure iterates through unique product categories
+- For each category, it sums the individual product volumes
+- Results are sorted by volume in descending order to highlight top-performing categories
+- This enables drill-down analysis from category level to individual products
 
 
