@@ -4,7 +4,8 @@
 
 * Arlen Ngahu - Power Query Data Preparation and Transformation
 * Brad Ochola - DAX Measures and Calculations
-* Andy Hadulo & Nicholas Kinyanjui - Dashboard Design and Visualisations
+* Andy Hadulo - Dashboard Design and Visualisations
+* Nicholas Kinyanjui - Dashboard Design and Visualisations
 * Nathan Omenge - Data Modelling
 * Allan Mutugi - README & Documentation
 
@@ -283,7 +284,7 @@ These transformations ensured that the dataset was clean, structured, and ready 
 ---
 
 ## DAX measures & columns 
-Andy Hadulo - 
+Brad Ochola - 
 
 #### From the DimPayments dataset we calculate the total payments per Payment type 
 
