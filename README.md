@@ -446,3 +446,94 @@ This measure calculates the total volume aggregated by product category. It sums
 - For each category, it sums the individual product volumes
 - Results are sorted by volume in descending order to highlight top-performing categories
 - This enables drill-down analysis from category level to individual products
+
+---
+
+## Power BI Data Modeling Steps
+Nathan Omenge - 670637
+
+This document outlines the complete, step-by-step process for transforming, modeling, and optimizing the Power BI dataset based on the Olist e-commerce data.
+
+## 1. DimPayments - Group By Aggregation
+The `DimPayments` table originally contained multiple rows per order (one per payment method). To resolve the many-to-many relationship risk, a **Group By** transformation was applied in Power Query. 
+
+Orders were grouped by `order_id` with three aggregations:
+- `Sum` of `payment_value` → renamed `TotalPayment`
+- `Min` of `payment_type` → renamed `Payment_Type`
+- `Max` of `payment_installments` → renamed `Payment_Installments`
+
+This ensures a clean **one-to-many** relationship between `DimPayments` and `FactTable`.
+
+## 2. DimSellers - Created from `olist_sellers_dataset`
+The raw `olist_sellers_dataset` table was renamed to `DimSellers` to serve as the seller dimension in the star schema. The table contains 4 columns:
+- `seller_id` (primary key)
+- `seller_zip_code_prefix`
+- `seller_city`
+- `seller_state`
+
+All columns showed 100% valid data with no errors or empty values. Basic cleaning steps including **Trim**, **Clean**, and **Capitalize Each Word** had already been applied to text columns.
+
+## 3. DimProducts - English Category Names Merged
+The `product_category_name_translation` table was merged into `DimProducts` using a **Left Outer Join** on the `product_category_name` column. The join retrieved the English equivalent category names from `Column2` of the translation table. The resulting column was renamed `Product_Category_English`. 
+
+This ensures product categories are displayed in English across all dashboard visuals. `DimProducts` now contains 10 columns including the new English category column.
+
+## 4. Hidden Unused Tables
+Three raw source tables were hidden from the report view to keep the model clean and prevent accidental use by report builders:
+- `olist_geolocation_dataset`
+- `olist_orders_dataset`
+- `product_category_name_translation`
+
+These tables served as data sources during the Power Query stage but are not required in the final analytical model.
+
+## 5. DimDate - Created using DAX `ADDCOLUMNS`
+A dedicated Date dimension table was created using DAX. The `CALENDAR` function generates a continuous date range from **1 January 2016** to **31 December 2018**, covering the full Olist dataset period. `ADDCOLUMNS` was used to derive 6 additional columns:
+- `Year`
+- `Month Number`
+- `Month Name`
+- `Quarter`
+- `Day Name`
+- `Week Number`
+
+This table is required to enable time intelligence DAX measures such as YTD, MTD, and YoY calculations.
+
+**DAX Code:**
+```dax
+DimDate = 
+ADDCOLUMNS(
+    CALENDAR(DATE(2016,1,1), DATE(2018,12,31)),
+    "Year", YEAR([Date]),
+    "Month Number", MONTH([Date]),
+    "Month Name", FORMAT([Date],"MMMM"),
+    "Quarter", "Q" & QUARTER([Date]),
+    "Day Name", FORMAT([Date],"DDDD"),
+    "Week Number", WEEKNUM([Date])
+)
+```
+
+## 6. DimDate - Marked as Official Date Table
+`DimDate` was marked as the official Date Table in Power BI using the **Table Tools** ribbon. The `Date` column was selected as the date column and validated successfully. This setting enables Power BI to use `DimDate` for all time intelligence calculations including YTD, MTD, QTD, and YoY measures in DAX.
+
+## 7. Relationships Built - Star Schema
+Six active relationships were established, all **many-to-one (*:1)** with single cross-filter direction from dimension to fact table:
+
+- `FactTable[customer_id]` → `DimCustomers[customer_id]`
+- `FactTable[Order_Date]` → `DimDate[Date]`
+- `FactTable[order_id]` → `DimPayments[order_id]`
+- `FactTable[product_id]` → `DimProducts[product_id]`
+- `FactTable[review_id]` → `DimReviews[review_id]`
+- `FactTable[seller_id]` → `DimSellers[seller_id]`
+
+All ambiguous relationships through `olist_orders_dataset` were removed. `DimReviews` duplicates were removed in Power Query before the relationship could be established.
+
+## 8. Hidden Foreign Key Columns
+Foreign key columns were hidden from the report view in both the `FactTable` and all dimension tables to prevent report builders from accidentally using join columns in visuals and to keep the Fields pane clean and professional.
+
+**Hidden in `FactTable`:**
+- `customer_id`
+- `product_id`
+- `seller_id`
+- `order_id`
+- `review_id`
+
+The corresponding primary key columns were also hidden in each dimension table.
