@@ -130,7 +130,6 @@ After performing the joins, I expanded only the columns necessary for analysis, 
 ![alt text](Screenshots/image-10.png) ## expanding olist_customers
 ![alt text](Screenshots/image-11.png) ## expanding olist_order_payments
 
----
 
 ## 4. Renaming Columns for Clarity
 
@@ -146,7 +145,6 @@ This step ensures that the dataset is easier to understand when building visuali
 
 ![alt text](Screenshots/image-12.png) ## renamed to order_date
 
----
 
 ## 5. Correcting Data Types
 
@@ -163,7 +161,6 @@ Correct data types are important because they allow Power BI to perform calculat
 ![alt text](Screenshots/image-13.png) ## changed from Date/Time to Date
 ![alt text](Screenshots/image-34.png) ## changed from any to text
 
----
 
 ## 6. Removing Duplicate Records
 
@@ -179,7 +176,6 @@ Removing duplicates prevents inaccurate calculations in measures such as total s
 
 ![alt text](Screenshots/image-14.png) ## removing duplicate records
 
----
 
 ## 7. Handling Missing Values
 
@@ -197,7 +193,6 @@ This approach preserves the original data while still enabling meaningful analys
 ![alt text](Screenshots/image-16.png) ## Creating the conditional column
 ![alt text](Screenshots/image-15.png) ## Shipping_Status column
 
----
 
 ## 8. Creating Delivery Time Metrics
 
@@ -208,7 +203,6 @@ This column calculates the **delivery duration in days**, which will later be us
 ![alt text](Screenshots/image-17.png) ## Creating the custom column
 ![alt text](Screenshots/image-18.png) ## Delivery_days column
 
----
 
 ## 9. Extracting Date Components
 
@@ -231,7 +225,6 @@ These fields allow the dashboard to analyze trends such as monthly sales pattern
 ![alt text](Screenshots/image-25.png) ## Inserted quarter
 ![alt text](Screenshots/image-26.png) ## Inserted day
 
----
 
 ## 10. Creating Regional Groupings
 
@@ -248,7 +241,6 @@ This transformation enables higher-level geographic comparisons such as **sales 
 ![alt text](Screenshots/image-20.png) ## Creating the conditional column
 ![alt text](Screenshots/image-19.png) ## Region column
 
----
 
 ## 11. Creating Additional Analytical Columns
 
@@ -263,7 +255,6 @@ These calculated columns enhance the dataset by introducing metrics that directl
 ![alt text](Screenshots/image-30.png) ## Custom column creation
 ![alt text](Screenshots/image-31.png) ## Order_total column
 
----
 
 ## Summary of Power Query Transformations
 
@@ -290,6 +281,7 @@ These transformations ensured that the dataset was clean, structured, and ready 
 ![alt text](Screenshots/image-38.png)
 ![alt text](Screenshots/image-39.png)
 
+---
 
 ## DAX measures & columns 
 
