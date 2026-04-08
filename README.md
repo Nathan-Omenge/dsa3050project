@@ -283,8 +283,145 @@ These transformations ensured that the dataset was clean, structured, and ready 
 
 ---
 
+## Data Modelling
+Nathan Omenge - 670637
+
+**Overview**
+The modeling stage transforms the cleaned Power Query output into a structured star schema suitable for DAX calculations and dashboard development in Power BI.
+
+
+## 2. Star Schema Design Rationale
+
+The model follows a standard star schema pattern with one central fact table surrounded by six dimension tables. This design was chosen because it:
+
+1. Optimises query performance in Power BI
+2. Enables clean DAX measure writing without ambiguous filter paths
+3. Supports time intelligence functions through a dedicated date dimension
+4. Meets the project rubric requirement for star schema implementation
+
+
+## Relationship Configuration
+
+All ambiguous auto-detected relationships through the olist_orders_dataset raw table were deleted. Six clean active relationships were then created following the standard star schema pattern of many-to-one (*:1) with single cross-filter direction from dimension to fact:
+
+| From (Fact) | Column | To (Dimension) | Cardinality | Status |
+|-------------|--------|----------------|-------------|--------|
+| FactTable | customer_id | DimCustomers | Many to one | Active |
+| FactTable | Order_Date | DimDate | Many to one | Active |
+| FactTable | order_id | DimPayments | Many to one | Active |
+| FactTable | product_id | DimProducts | Many to one | Active |
+| FactTable | review_id | DimReviews | Many to one | Active |
+| FactTable | seller_id | DimSellers | Many to one | Active |
+
+**Note:** DimReviews required duplicate removal on the review_id column in Power Query before the relationship could be established, as Power BI requires unique values on the one side of a many-to-one relationship.
+
+
+## Foreign Key Column Management
+
+Foreign key columns in both the FactTable and dimension tables were hidden from report view. These columns are used only for joining tables and should not appear in the Fields pane for report builders.
+
+**Hidden in FactTable:** customer_id, product_id, seller_id, order_id, review_id
+
+**Hidden in Dim tables:** The corresponding primary key column in each dimension table was also hidden.
+
+
+## Model Validation Checklist
+
+The completed star schema model meets all rubric requirements for the data modeling stage:
+
+1. Star schema implementation with FactTable at the center
+2. One fact table (FactTable) and six dimension tables
+3. Dedicated Date dimension (DimDate) created using DAX
+4. Clean relationship design with correct many-to-one cardinality
+5. Single cross-filter direction on all relationships
+6. DimDate marked as the official Date Table for time intelligence
+7. Foreign key columns hidden from report view
+8. Model view arranged in a professional star schema layout
+9. Unused raw tables hidden from report view
+
+
+## Tools and Techniques Used
+
+1. Microsoft Power BI Desktop
+2. Power Query Editor (for DimPayments aggregation, DimSellers rename, DimProducts merge, DimReviews deduplication)
+3. DAX (for DimDate creation using ADDCOLUMNS and CALENDAR functions)
+4. Model View (for relationship building and layout arrangement)
+5. Table Tools (for marking DimDate as official Date Table)
+
+
+## Table Summary
+
+| Table | Type | Row Count | Primary Key | Joins To |
+|-------|------|-----------|-------------|----------|
+| FactTable | Fact | 95,122 | - | All Dims |
+| DimCustomers | Dimension | 99,441 | customer_id | FactTable |
+| DimProducts | Dimension | 999+ | product_id | FactTable |
+| DimSellers | Dimension | 999+ | seller_id | FactTable |
+| DimPayments | Dimension | 999+ | order_id | FactTable |
+| DimReviews | Dimension | 999+ | review_id | FactTable |
+| DimDate | Dimension | 1,096 | Date | FactTable |
+
+
+## Key Transformations and Resolutions
+
+### Step 1 - DimPayments Aggregation
+
+**Issue identified:** The raw DimPayments table contained multiple rows per order because some customers paid using more than one payment method (e.g. part credit card, part voucher). Retaining this structure would have created a many-to-many relationship with the FactTable, causing incorrect DAX calculations.
+
+**Resolution:** A Group By transformation was applied in Power Query Editor using the Advanced mode with the following aggregations:
+
+1. Group by: order_id
+2. Total_Payment = Sum of payment_value
+3. Payment_Type = Min of payment_type
+4. Payment_Installments = Max of payment_installments
+
+**Result:** DimPayments now contains one row per order_id, enabling a clean one-to-many relationship with the FactTable.
+
+### Step 2 - DimSellers Created
+
+The raw olist_sellers_dataset table was renamed to DimSellers in Power Query Editor. No additional transformations were required as the table was already clean with 100% valid data across all four columns.
+
+**Columns in DimSellers:**
+1. seller_id (primary key)
+2. seller_zip_code_prefix
+3. seller_city
+4. seller_state
+
+### Step 3 - DimProducts Category Translation
+
+**Issue identified:** The product_category_name column in DimProducts contained Portuguese category names, which would appear in dashboard visuals and reduce professional quality.
+
+**Resolution:** The product_category_name_translation lookup table was merged into DimProducts using Merge Queries in Power Query with the following settings:
+
+1. Join type: Left Outer Join
+2. Join key: product_category_name (DimProducts) matched to Column1 (translation table)
+3. Expanded column: Column2 (English names only)
+4. Renamed to: Product_Category_English
+
+**Result:** DimProducts now contains 10 columns including Product_Category_English with English category names visible across all dashboard visuals.
+
+
+## Unused Raw Tables Hidden
+
+Three raw source tables were hidden from the report view to keep the Fields pane clean and prevent accidental use by report builders:
+
+1. olist_geolocation_dataset - geographic coordinates, not used in analysis
+2. olist_orders_dataset - all required columns already merged into FactTable
+3. product_category_name_translation - English names already merged into DimProducts
+
+These tables remain in the model for data lineage purposes but are not visible in the report-building interface.
+
+
+## Date Table Configuration
+
+DimDate was marked as the official Date Table using the Table Tools ribbon in Data view. The Date column was selected as the date column and validated successfully.
+
+This setting is required to unlock Power BI time intelligence functions including TOTALYTD, TOTALMTD, SAMEPERIODLASTYEAR, and DATEADD which are used in the DAX measures stage.
+
+---
+
 ## DAX measures & columns 
-Brad Ochola - 
+Brad Ochola - 670346
 
 #### From the DimPayments dataset we calculate the total payments per Payment type 
 
@@ -309,5 +446,3 @@ This measure calculates the total volume aggregated by product category. It sums
 - For each category, it sums the individual product volumes
 - Results are sorted by volume in descending order to highlight top-performing categories
 - This enables drill-down analysis from category level to individual products
-
-
