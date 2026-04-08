@@ -294,6 +294,8 @@ These transformations ensured that the dataset was clean, structured, and ready 
 
 <img width="1337" height="672" alt="image" src="https://github.com/user-attachments/assets/118e6128-bafb-4bd8-b79e-9d3fd984df4f" />
 
+This measure calculates the aggregated payment amount grouped by payment type from the DimPayments dataset. The query uses the SUMX function to iterate through each payment type and sum the corresponding payment amounts. This enables analysis of revenue distribution across different payment methods (e.g., credit card, debit card, voucher, etc.).
+
 #### New column for volume of products using DAX 
 
 <img width="1301" height="640" alt="image" src="https://github.com/user-attachments/assets/1b9a4754-0e84-4045-94f2-0fd4a0a84f7b" />
