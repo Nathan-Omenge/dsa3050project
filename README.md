@@ -381,6 +381,7 @@ The completed star schema model meets all rubric requirements for the data model
 
 The raw olist_sellers_dataset table was renamed to DimSellers in Power Query Editor. No additional transformations were required as the table was already clean with 100% valid data across all four columns.
 
+
 **Columns in DimSellers:**
 1. seller_id (primary key)
 2. seller_zip_code_prefix
@@ -398,6 +399,8 @@ The raw olist_sellers_dataset table was renamed to DimSellers in Power Query Edi
 3. Expanded column: Column2 (English names only)
 4. Renamed to: Product_Category_English
 
+
+
 **Result:** DimProducts now contains 10 columns including Product_Category_English with English category names visible across all dashboard visuals.
 
 
@@ -410,7 +413,6 @@ Three raw source tables were hidden from the report view to keep the Fields pane
 3. product_category_name_translation - English names already merged into DimProducts
 
 These tables remain in the model for data lineage purposes but are not visible in the report-building interface.
-
 
 ## Date Table Configuration
 
@@ -444,6 +446,11 @@ All columns showed 100% valid data with no errors or empty values. Basic cleanin
 ## 3. DimProducts - English Category Names Merged
 The `product_category_name_translation` table was merged into `DimProducts` using a **Left Outer Join** on the `product_category_name` column. The join retrieved the English equivalent category names from `Column2` of the translation table. The resulting column was renamed `Product_Category_English`. 
 
+<img width="975" height="552" alt="image" src="https://github.com/user-attachments/assets/b9441392-07a7-4f90-95a9-efcc44540b2d" />
+
+<img width="975" height="616" alt="image" src="https://github.com/user-attachments/assets/bfba4534-40b3-473d-a8c3-cab5c8220729" />
+
+
 This ensures product categories are displayed in English across all dashboard visuals. `DimProducts` now contains 10 columns including the new English category column.
 
 ## 4. Hidden Unused Tables
@@ -451,6 +458,8 @@ Three raw source tables were hidden from the report view to keep the model clean
 - `olist_geolocation_dataset`
 - `olist_orders_dataset`
 - `product_category_name_translation`
+
+<img width="975" height="552" alt="image" src="https://github.com/user-attachments/assets/312be579-1f72-451e-9950-b3d0420006b1" />
 
 These tables served as data sources during the Power Query stage but are not required in the final analytical model.
 
@@ -462,6 +471,9 @@ A dedicated Date dimension table was created using DAX. The `CALENDAR` function 
 - `Quarter`
 - `Day Name`
 - `Week Number`
+
+<img width="975" height="542" alt="image" src="https://github.com/user-attachments/assets/1d5a2cf5-4f39-4e79-9c28-b94ad5e5496a" />
+
 
 This table is required to enable time intelligence DAX measures such as YTD, MTD, and YoY calculations.
 
@@ -482,6 +494,11 @@ ADDCOLUMNS(
 ## 6. DimDate - Marked as Official Date Table
 `DimDate` was marked as the official Date Table in Power BI using the **Table Tools** ribbon. The `Date` column was selected as the date column and validated successfully. This setting enables Power BI to use `DimDate` for all time intelligence calculations including YTD, MTD, QTD, and YoY measures in DAX.
 
+<img width="875" height="549" alt="image" src="https://github.com/user-attachments/assets/58554cf1-31f7-4ace-aa08-d25f2df410ac" />
+
+<img width="975" height="442" alt="image" src="https://github.com/user-attachments/assets/845e72d8-10f4-4181-acd0-cc7b90d31b20" />
+
+
 ## 7. Relationships Built - Star Schema
 Six active relationships were established, all **many-to-one (*:1)** with single cross-filter direction from dimension to fact table:
 
@@ -491,6 +508,9 @@ Six active relationships were established, all **many-to-one (*:1)** with single
 - `FactTable[product_id]` → `DimProducts[product_id]`
 - `FactTable[review_id]` → `DimReviews[review_id]`
 - `FactTable[seller_id]` → `DimSellers[seller_id]`
+
+<img width="975" height="598" alt="image" src="https://github.com/user-attachments/assets/dadfe423-1bdc-45f9-9033-e6b5de3677f9" />
+
 
 All ambiguous relationships through `olist_orders_dataset` were removed. `DimReviews` duplicates were removed in Power Query before the relationship could be established.
 
@@ -503,6 +523,9 @@ Foreign key columns were hidden from the report view in both the `FactTable` and
 - `seller_id`
 - `order_id`
 - `review_id`
+
+<img width="975" height="457" alt="image" src="https://github.com/user-attachments/assets/26baa7b5-6b87-4a45-a2be-2109c91e8bf1" />
+
 
 The corresponding primary key columns were also hidden in each dimension table.
 
