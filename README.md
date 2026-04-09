@@ -418,39 +418,7 @@ DimDate was marked as the official Date Table using the Table Tools ribbon in Da
 
 This setting is required to unlock Power BI time intelligence functions including TOTALYTD, TOTALMTD, SAMEPERIODLASTYEAR, and DATEADD which are used in the DAX measures stage.
 
----
-
-## DAX measures & columns 
-Brad Ochola - 670346
-
-#### From the DimPayments dataset we calculate the total payments per Payment type 
-
-<img width="1337" height="672" alt="image" src="https://github.com/user-attachments/assets/118e6128-bafb-4bd8-b79e-9d3fd984df4f" />
-
-This measure calculates the aggregated payment amount grouped by payment type from the DimPayments dataset. The query uses the SUMX function to iterate through each payment type and sum the corresponding payment amounts. This enables analysis of revenue distribution across different payment methods (e.g., credit card, debit card, voucher, etc.).
-
-#### New column for volume of products using DAX 
-
-<img width="1301" height="640" alt="image" src="https://github.com/user-attachments/assets/1b9a4754-0e84-4045-94f2-0fd4a0a84f7b" />
-
-This calculated column computes the volume of products by calculating the total quantity of items ordered. The column uses DAX to aggregate order quantities at the product level. This metric is essential for understanding product demand and inventory movement.
-
-#### measure of total volume per product using dax 
-
-<img width="1314" height="648" alt="image" src="https://github.com/user-attachments/assets/921f386e-6a1b-4913-ad5e-4eb7454c3e98" />
-
-This measure calculates the total volume aggregated by product category. It sums the product volumes across all orders, grouped by product category, enabling high-level analysis of category performance. The measure uses SUMX in combination with category grouping to provide insights into which product categories have the highest sales volumes.
-
-**Technical Details:**
-- The measure iterates through unique product categories
-- For each category, it sums the individual product volumes
-- Results are sorted by volume in descending order to highlight top-performing categories
-- This enables drill-down analysis from category level to individual products
-
----
-
 ## Power BI Data Modeling Steps
-Nathan Omenge - 670637
 
 This document outlines the complete, step-by-step process for transforming, modeling, and optimizing the Power BI dataset based on the Olist e-commerce data.
 
@@ -537,3 +505,36 @@ Foreign key columns were hidden from the report view in both the `FactTable` and
 - `review_id`
 
 The corresponding primary key columns were also hidden in each dimension table.
+
+
+---
+
+## DAX measures & columns 
+Brad Ochola - 670346
+
+#### From the DimPayments dataset we calculate the total payments per Payment type 
+
+<img width="1337" height="672" alt="image" src="https://github.com/user-attachments/assets/118e6128-bafb-4bd8-b79e-9d3fd984df4f" />
+
+This measure calculates the aggregated payment amount grouped by payment type from the DimPayments dataset. The query uses the SUMX function to iterate through each payment type and sum the corresponding payment amounts. This enables analysis of revenue distribution across different payment methods (e.g., credit card, debit card, voucher, etc.).
+
+#### New column for volume of products using DAX 
+
+<img width="1301" height="640" alt="image" src="https://github.com/user-attachments/assets/1b9a4754-0e84-4045-94f2-0fd4a0a84f7b" />
+
+This calculated column computes the volume of products by calculating the total quantity of items ordered. The column uses DAX to aggregate order quantities at the product level. This metric is essential for understanding product demand and inventory movement.
+
+#### measure of total volume per product using dax 
+
+<img width="1314" height="648" alt="image" src="https://github.com/user-attachments/assets/921f386e-6a1b-4913-ad5e-4eb7454c3e98" />
+
+This measure calculates the total volume aggregated by product category. It sums the product volumes across all orders, grouped by product category, enabling high-level analysis of category performance. The measure uses SUMX in combination with category grouping to provide insights into which product categories have the highest sales volumes.
+
+**Technical Details:**
+- The measure iterates through unique product categories
+- For each category, it sums the individual product volumes
+- Results are sorted by volume in descending order to highlight top-performing categories
+- This enables drill-down analysis from category level to individual products
+
+---
+
